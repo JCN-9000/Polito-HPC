@@ -1,0 +1,300 @@
+================================================================================
+
+
+
+                                    +-----+                                     
+                                    | HPC |                                     
+                                    +-----+                                     
+
+
+
+                                  +----------+                                  
+                                  | JCN-9000 |                                  
+                                  +----------+                                  
+
+
+
+                                 +------------+                                 
+                                 | 2019-05-09 |                                 
+                                 +------------+                                 
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       1/11 
+                               Table of Contents                                
+ JCN-9000                                                            2019-05-09 
+================================================================================
+                      +---------------------------------+                       
+                      | * Definition                    |                       
+                      | * Wikipedia IT                  |                       
+                      | * TOP 500                       |                       
+                      | * IPC - Process                 |                       
+                      | * Approaches to message passing |                       
+                      | * MPI                           |                       
+                      | * Pelican HPC                   |                       
+                      | * PelicanHPC over Virtualbox    |                       
+                      | * PelicanHPC over KVM           |                       
+                      | * URLS                          |                       
+                      +---------------------------------+                       
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       2/11 
+                                   Definition                                   
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+   +------------------------------------------------------------------------+   
+   | HPC (https://tinyurl.com/yycxbun4)                                     |   
+   |     HPC systems tend to focus on tightly coupled parallel jobs, and as |   
+   |     such they must execute within a particular site with low-latency   |   
+   |     interconnects.                                                     |   
+   | [images/Summit_small.jpg]                                              |   
+   +------------------------------------------------------------------------+   
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       3/11 
+                                  Wikipedia IT                                  
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+  +-------------------------------------------------------------------------+   
+  | HPC (https://tinyurl.com/yycxbun4IT)                                    |   
+  |     Con High Performance Computing (HPC) (in italiano calcolo ad        |   
+  |     elevate prestazioni), in informatica, ci si riferisce alle          |   
+  |     tecnologie utilizzate da computer cluster per creare dei sistemi di |   
+  |     elaborazione in grado di fornire delle prestazioni molto elevate    |   
+  |     nell'ordine dei PetaFLOPS, ricorrendo tipicamente al calcolo        |   
+  |     parallelo.                                                          |   
+  +-------------------------------------------------------------------------+   
+
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       4/11 
+                                    TOP 500                                     
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+
+ TOP_500 (https://www.top500.org/)
+ LIST (https://www.top500.org/lists/2018/11/)
+ 1-100 (https://www.top500.org/list/2018/11/?page=1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       5/11 
+                                 IPC - Process                                  
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+       +---------------------------------------------------------------+        
+       | * shared files / memory + semaphores                          |        
+       | * pipes (named, unnamed) (https://opensource.com/article/19/4 |        
+       |   /interprocess-communication-linux-channels)                 |        
+       | * message queues                unidirectional                |        
+       | * sockets (memory, network )    bi-directional                |        
+       | * signals                                                     |        
+       | * RPC (https://en.wikipedia.org/wiki/Remote_procedure_call)   |        
+       |   * ONC/RPC, XML-RPC -> SOAP, CORBA, JSON-RPC, gRPC, ...      |        
+       +---------------------------------------------------------------+        
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       6/11 
+                         Approaches to message passing                          
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+      +------------------------------------------------------------------+      
+      | PVM                                                              |      
+      |     Parallel Virtual Machine                                     |      
+      |     PVM (https://en.wikipedia.org/wiki/Parallel_Virtual_Machine) |      
+      | MPI the Message Passing Interface                                |      
+      |     MPI (https://tinyurl.com/6mfo5pf)                            |      
+      +------------------------------------------------------------------+      
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       7/11 
+                                      MPI                                       
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+
+ --map-by hwthread
+ --rank-by hwthread
+ --bind-to hwthread
+ --use-hwthread-cpus
+
+ mpirun --use-hwthread-cpus --bind-to hwthread -np 4
+
+ mpirun --map-by node    : balanced - rrobin
+ mpirun -nolocal
+
+ mpirun --use-hwthread-cpus --bind-to hwthread -np 1 search_mpi
+   Elapsed wallclock time is 59.731
+ mpirun --use-hwthread-cpus --bind-to hwthread -np 2 search_mpi
+   Elapsed wallclock time is 44.0702
+ mpirun --use-hwthread-cpus --bind-to hwthread -np 3 search_mpi
+   Elapsed wallclock time is 31.4417
+
+================================================================================
+================================================================================
+ HPC                                                                       8/11 
+                                  Pelican HPC                                   
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+ https://www.pelicanhpc.org/index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                       9/11 
+                           PelicanHPC over Virtualbox                           
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+ First Steps ...
+ sudo mkdir /cdrom
+ sudo mount -oro /dev/sr1 /cdrom
+ sudo /cdrom/VBoxLinuxAdditions.run
+
+ sudo ln -sf /home/etc/apt/sources.list /etc/apt/sources.list
+ sudo apt update
+ sudo apt install libatlas3-base
+ sudo apt install gpm
+
+ cd hpl-2.0
+ sh SetupForPelican
+ cd bin/Pelican HPC
+ orterun --hostfile /home/usr/tmp/bhosts -np 4 xhpl
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                      10/11 
+                              PelicanHPC over KVM                               
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================
+================================================================================
+ HPC                                                                      11/11 
+                                      URLS                                      
+ JCN-9000                                                            2019-05-09 
+================================================================================
+
+ HPC (https://www.techopedia.com/definition/4595/high-performance-computing-
+ hpc)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+================================================================================

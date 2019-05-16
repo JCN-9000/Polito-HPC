@@ -1,0 +1,90 @@
+
+========================================================================
+
+
+                                +-----+                                 
+                                | HPC |                                 
+                                +-----+                                 
+
+
+                              +----------+                              
+                              | JCN-9000 |                              
+                              +----------+                              
+
+
+                             +------------+                             
+                             | 2019-05-09 |                             
+                             +------------+                             
+
+
+========================================================================
+
+                                +-----+
+                                | HPC |
+                                +-----+
+
+
+IPC - Process!
+==============
+
+- shared files / memory + semaphores
+- pipes (named, unnamed)[1]
+- message queues                unidirectional
+- sockets (memory, network )    bi-directional
+- signals
+- RPC[2]
+  - ONC/RPC, XML-RPC -> SOAP, CORBA, JSON-RPC, gRPC, ...
+
+
+MPI
+===
+
+--map-by hwthread
+--rank-by hwthread
+--bind-to hwthread
+--use-hwthread-cpus
+
+mpirun --use-hwthread-cpus --bind-to hwthread -np 4
+
+mpirun --map-by node    : balanced - rrobin
+mpirun -nolocal
+
+mpirun --use-hwthread-cpus --bind-to hwthread -np 1 search_mpi
+  Elapsed wallclock time is 59.731
+mpirun --use-hwthread-cpus --bind-to hwthread -np 2 search_mpi
+  Elapsed wallclock time is 44.0702
+mpirun --use-hwthread-cpus --bind-to hwthread -np 3 search_mpi
+  Elapsed wallclock time is 31.4417
+
+
+Pelican HPC
+===========
+
+https://www.pelicanhpc.org/index.html
+
+
+PelicanHPC over Virtualbox
+==========================
+
+First Steps ...
+sudo mkdir /cdrom
+sudo mount -oro /dev/sr1 /cdrom
+sudo /cdrom/VBoxLinuxAdditions.run
+
+sudo ln -sf /home/etc/apt/sources.list /etc/apt/sources.list
+sudo apt update
+sudo apt install libatlas3-base
+sudo apt install gpm
+
+cd hpl-2.0
+sh SetupForPelican
+cd bin/Pelican HPC
+orterun --hostfile /home/usr/tmp/bhosts -np 4 xhpl
+
+
+PelicanHPC over KVM
+===================
+
+[1] https://opensource.com/article/19/4/interprocess-communication-
+linux-channels
+[2] https://en.wikipedia.org/wiki/Remote_procedure_call

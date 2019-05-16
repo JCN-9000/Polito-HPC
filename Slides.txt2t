@@ -1,0 +1,378 @@
+HPC
+JCN-9000
+2019-05-16
+%! style    : 
+%! encoding : 
+
+
+         = HPC =
+
+- High Performance Computer : Supercomputer
+- High Performance Computing : Parallel
+
+- [BOINC https://boinc.berkeley.edu/] is a platform for high-throughput computing
+    "Seti@Home", "Folding@Home", ( [List of distributed computing projects https://en.wikipedia.org/wiki/List_of_distributed_computing_projects] )
+
+= Definition =
+
+-
+
+: [HPC https://insidehpc.com/hpc-basic-training/what-is-hpc/]
+
+    High Performance Computing most generally refers to the practice of
+    aggregating computing power in a way that delivers much higher
+    performance than one could get out of a typical desktop computer or
+    workstation in order to solve large problems in science,
+    engineering, or business.
+
+[images/Summit_small.jpg]
+
+= Wikipedia IT =
+
+: [HPC https://it.wikipedia.org/wiki/High_Performance_Computing]
+
+    Con High Performance Computing (HPC) (in italiano calcolo ad
+    elevate prestazioni), in informatica, ci si riferisce alle
+    tecnologie utilizzate da computer cluster per creare dei sistemi di
+    elaborazione in grado di fornire delle prestazioni molto elevate
+    nell'ordine dei PetaFLOPS, ricorrendo tipicamente al calcolo
+    parallelo.
+
+= FLOPS =
+
+:
+
+- FLOPS Unit https://en.wikipedia.org/wiki/Unit_prefix
+
+ Metric prefixes in everyday use
+-
+
+| Text   | Symbol   | Factor   | Power   |
+| yotta   | Y   | 1000000000000000000000000   | 10E24   |
+| zetta   | Z   | 1000000000000000000000   | 10E21   |
+| exa   | E   | 1000000000000000000   | 10E18   |
+| peta   | P   | 1000000000000000   | 10E15   |
+| tera   | T   | 1000000000000   | 10E12   |
+| giga   | G   | 1000000000   | 10E9   | PC (~60)   |
+| mega   | M   | 1000000   | 10E6   |
+| kilo   | k   | 1000   | 10E3   |
+| hecto   | h   | 100   | 10E2   |
+| deca   | da   | 10   | 10E1   |
+| (none)   | (none)   | 1   | 10E0   |
+
+         = Local FLOPS using Linpak =
+
++ Download Linpak [(link) https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
++ Extract
++ cd .../linux/mkl/benchmarks/linpack
++ ./runme_xeon64
+
+```
+
+
+
+
+Es.
+cd /home/avaresio/downloads/l_mklb_p_11.3.3.011/
+cd benchmarks_11.3.3/linux/mkl/benchmarks/linpack
+./runme_xeon64
+```
+
+= TOP 500 =
+
++
+
+- TOP_500 [https://www.top500.org/ TOP_500 https://www.top500.org/]
+- [1-10 LIST https://www.top500.org/lists/2018/11/]
+- [1-100 https://www.top500.org/list/2018/11/?page=1]
+-
+
+[[images/HPC4-ENI.jpg] https://www.eni.com/it_IT/innovazione/piattaforme-tecnologiche/aumento-recupero-idrocarburi/hpc.page]
+
+         = Hardware components =
+
+- Power Supply : 10MW (Medium Town)
+- Space and Cooling
+- Box: IBM, Cray, Fujitsu, Lenovo, HPE, Bull, Dell
+- CPU: IBM, Intel, AMD, ARM, Custom
+- GPU: AMD, NVIDIA
+- Network
+  - Mellanox Infiniband
+  - Intel OmniPath
+  - Ethernet > 10GBit
+  -
+- Shared Filesystem
+  - NFS (Mostly Read)
+  - [pNFS http://www.pnfs.com/]
+  - [Lustre http://lustre.org/]
+  - [Gluster https://www.gluster.org/]
+  - [BeeGFS https://www.beegfs.io/content/]
+  - Ceph
+  -
+- A Lot of $$$
+-
+
+         = Marchetta PoliTO =
+
+- Useful Tools to manage / use an HPC Cluster
+  - Ansible
+  - GIT
+  - Docker, Singularity
+  - Nagios, Ganglia, Zabbix
+  - Job Scheduler (Slurm,PBS,Grid Engine)
+  -
+-
+
+         = Software Components =
+
+- Application Code (rewritten from Serial to Parallel)
+- Libraries for IPC
+- Lib to use GPU: CUDA, OpenCL
+- IDE
+- GUI to High Level Tools (Jupyter Notebook)
+
+= IPC - Inter Process Communication =
+
+- shared files / memory + semaphores
+- [pipes (named, unnamed) https://opensource.com/article/19/4/interprocess-communication-linux-channels]
+- message queues                unidirectional
+- sockets (memory, network )    bi-directional
+- signals
+- [RPC https://en.wikipedia.org/wiki/Remote_procedure_call]
+  - ONC/RPC, XML-RPC -> SOAP, CORBA, JSON-RPC, gRPC, ...
+  -
+-
+
+         = Approaches to message passing =
+
+: [PVM https://en.wikipedia.org/wiki/Parallel_Virtual_Machine]
+    Parallel Virtual Machine
+
+: [MPI https://tinyurl.com/6mfo5pf]
+    Message Passing Interface
+
+= MPI =
+
+:
+
+- OpenMP (threads)
+- OpenMPI
+- IntelMPI
+- PlatformMPI
+-
+
+         = Compile and Run - Hello World =
+
+```
+int main ( int argc, char *argv[] );
+{
+  printf ( "  Hello, world!\n" );
+
+  return 0;
+}
+```
+
+- mpicc -o hello hello.c
+- mpirun --use-hwthread-cpus -np 4 hello
+- mpirun --use-hwthread-cpus -np 4 -tag-output hello
+- mpirun --use-hwthread-cpus -np 4 -report-bindings hello
+- mpirun --use-hwthread-cpus -np 4 --bind-to hwthread -report-bindings hello
+
+= Compile and Run - hello_mpi =
+
+- [hello_mpi.c file://hello_mpi.c] (see on Editor)
+
+- mpicc -o hello_mpi hello_mpi.c
+- mpirun --use-hwthread-cpus  -np 4 -report-bindings hello_mpi
+- mpirun --use-hwthread-cpus --bind-to hwthread -np 4 hello_mpi
+- mpirun --use-hwthread-cpus --bind-to hwthread -np 4 -report-bindings hello_mpi
+
+= Output of hello_mpi =
+```
+  Process 3 says 'Hello, world!'
+
+  Process 2 says 'Hello, world!'
+  Process 1 says 'Hello, world!'
+HELLO_MPI - Master process:
+  C/MPI version
+  An MPI example program.
+
+  The number of processes is 4.
+
+  Process 0 says 'Hello, world!'
+  Elapsed wall clock time = 0.000342 seconds.
+
+HELLO_MPI - Master process:
+  Normal end of execution: 'Goodbye, world!'
+
+10 May 2019 07:43:00 PM
+```
+
+= Compile and Run - ring =
+- mpicc -o ring_c ring_c.c
+- mpirun --use-hwthread-cpus --bind-to hwthread -np 4 -report-bindings ring_c
+
+= Compile and Run - Search Serial =
+- gcc -Ofast -o search_serial_mklb_p_2018.3.011l search_serial.c
+- ./search_serial
+-
+
+- Elapsed CPU time is 23.3898
+
+= Compile and Run - Search MPI =
+- mpicc -Ofast -o search_mpi search_mpi.c
+- mpirun --bind-to hwthread -np 3 search_mpi
+
+- Elapsed wallclock time is 12.3633
+
+- use nmon to see CPU load
+
+= HPC HOWTO =
+- http://www.admin-magazine.com/HPC/Articles/Building-an-HPC-Cluster
+- http://hpc.fs.uni-lj.si/sites/default/files/HPC_for_dummies.pdf
+- https://openhpc.community/downloads/
+- https://opensource.com/article/18/1/how-build-hpc-system-raspberry-pi-and-openhpc
+- http://bccd.net/
+- https://www.rocksclusters.org/
+
+- https://pelicanhpc.org/
+
+= Pelican HPC =
+
+https://www.pelicanhpc.org/index.html
+-
+
+         = PelicanHPC over Virtualbox =
+
+First Steps ...
+sudo mkdir /cdrom
+sudo mount -oro /dev/sr1 /cdrom
+sudo /cdrom/VBoxLinuxAdditions.run
+
+sudo ln -sf /home/etc/apt/sources.list /etc/apt/sources.list
+sudo apt update
+sudo apt install libatlas3-base
+sudo apt install gpm
+
+cd hpl-2.0
+sh SetupForPelican
+cd bin/Pelican HPC
+orterun --hostfile /home/usr/tmp/bhosts -np 4 xhpl
+
+         = PelicanHPC over KVM =
+
+         = URLS =
+
+- [HPC@Polito http://hpc.polito.it/]
+-
+
+- https://openhpc.community
+https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
+
+= JupyterLab
+-
+
+Tensorflow
+docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/tensorflow-notebook start.sh jupyter lab
+
+DataScience
+docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/datascience-notebook start.sh jupyter lab
+
+         = Questions =
+
+[images/Lenna.png]
+
+         = Sponsor =
+
+- DoIT [http://www.doit-systems.it http://www.doit-systems.it/]
+- [DoIT - Work With US http://www.doit-systems.it/EN_lavoraconnoi.html]
+
+  [images/DoIT.png]
+
+-
+
+=========================
+
+         = Extra Slides =
+
+        == Commands & Aliases ==
+
+```
+alias S='/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
+pandoc -s -t beamer -V theme:Copenhagen -V colortheme:wolverine -f t2t -o Slides.tex Slides.txt2t
+sed -i "/^ *:$/d" Slides.tex
+sed -i "/^ *-$/d" Slides.tex
+pdflatex Slides.tex > Slides.plog
+rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}'
+
+alias I='impressive --noquit -f -d 1:30:00 -M -g 1280x1024 \
+ --page-progress --time-display --tracking \
+ Slides.pdf'
+```
+=========================
+
+         = Presentation Tools =
+
+        == TXT2TAGS + LaTEX Beamer ==
+
+```
+/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
+pandoc -s -t beamer -f t2t -o Slides.tex Slides.txt2t
+sed -i '/^ *:$/d' Slides.tex
+sed -i '/^ *-$/d' Slides.tex
+pdflatex Slides.tex > Slides.plog
+rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}
+bl-file-manager Slides.pdf
+```
+
+        == TXT2TAGS + LaTEX Beamer (alternative method) ==
+
+```
+/home/avaresio/GIT/txt2tags/txt2tags -vv \
+-C /home/avaresio/GIT/txt2tags/templates/beamer.conf.t2t \
+-T /home/avaresio/GIT/txt2tags/templates/beamer.tex \
+-t tex Slides.t2t
+```
+
+        == Presentation Tool ==
+
+```
+impressive -f -d 1:30:00 -M -g 1024x768 \
+ --page-progress --time-display --tracking \
+ Slides.pdf
+```
+
+         = Skip =
+
+        == Further IDEAS ==
+
+- Q commands
+- Queuing system
+
+== TXT2TAGS - ASCII Art Presentation ==
+```
+/home/avaresio/GIT/txt2tags/txt2tags -t aapp --slides Slides.t2t
+enscript -l -r -p file.ps Slides.aapp
+ps2pdf file.ps Slides.pdf
+```
+
+= Skip =
+
+--map-by hwthread
+--rank-by hwthread
+--bind-to hwthread
+--use-hwthread-cpus
+
+mpirun --map-by node    : balanced - rrobin
+mpirun -nolocal
+
+mpirun --use-hwthread-cpus --bind-to hwthread -np 1 search_mpi
+  Elapsed wallclock time is 59.731
+mpirun --use-hwthread-cpus --bind-to hwthread -np 2 search_mpi
+  Elapsed wallclock time is 44.0702
+mpirun --use-hwthread-cpus --bind-to hwthread -np 3 search_mpi
+  Elapsed wallclock time is 31.4417
+-
+
+% txt2t code generated by txt2tags 2.6. (http://txt2tags.org)
+% cmdline: txt2tags -t txt2t Slides.t2t
