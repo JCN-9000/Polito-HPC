@@ -25,6 +25,7 @@ JCN-9000
 %!preproc:  MPIURL https://en.wikipedia.org/wiki/Message_passing_in_computer_clusters
 %!preproc:  MPITURL https://tinyurl.com/6mfo5pf
 
+
 = HPC =
 
 - High Performance Computer : Supercomputer
@@ -32,6 +33,7 @@ JCN-9000
 
 - [BOINC https://boinc.berkeley.edu/] is a platform for high-throughput computing
     """Seti@Home""", """Folding@Home""", ( [List of distributed computing projects ""https://en.wikipedia.org/wiki/List_of_distributed_computing_projects""] )
+
 
 = Definition =
 
@@ -45,6 +47,7 @@ JCN-9000
 
 [images/Summit_small.jpg]
 
+
 = Wikipedia IT =
 
 : [HPC HPCITURL]
@@ -56,48 +59,54 @@ JCN-9000
     nell'ordine dei PetaFLOPS, ricorrendo tipicamente al calcolo
     parallelo.
 
+
 = FLOPS =
 
 - FLOPS Unit https://en.wikipedia.org/wiki/Unit_prefix
 
- Metric prefixes in everyday use
+| | | **Metric prefixes in everyday use** | |
 | Text | Symbol | Factor | Power |
 | yotta | Y | 1000000000000000000000000 | 10E24 |
 | zetta | Z | 1000000000000000000000 | 10E21 |
 | exa   | E | 1000000000000000000 | 10E18 |
 | peta  | P | 1000000000000000 | 10E15 |
 | tera  | T | 1000000000000 | 10E12 |
-| giga  | G | 1000000000 | 10E9 | PC (~60)
+| giga  | G | 1000000000 (PC) | 10E9 |
 | mega  | M | 1000000 | 10E6 |
 | kilo  | k | 1000 | 10E3 |
 | hecto | h | 100 | 10E2 |
 | deca  | da | 10 | 10E1 |
 | (none) | (none) | 1 | 10E0 |
 
-= Local FLOPS using Linpak =
 
-+ Download Linpak [(link) https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
+= Local FLOPS using HPL/Linpak =
+- [Rate Your PC http://hpl-calculator.sourceforge.net/]
+== Netlib Linpak ==
+- HPL from Netlib
+- http://www.netlib.org/benchmark/hpl/
+- [Build HPL.dat https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/]
+```
+cd ~/GIT/Polito-HPC/hpl-2.3/testing
+mpirun -np 2 ./xhpl
+```
+== Intel Linpak ==
++ Download Intel Linpak [(link) https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
 + Extract
 + cd .../linux/mkl/benchmarks/linpack
 + ./runme_xeon64
-
 ```
-
-
-
-
-Es.
-cd /home/avaresio/downloads/l_mklb_p_11.3.3.011/
-cd benchmarks_11.3.3/linux/mkl/benchmarks/linpack
+cd ~/GIT/Polito-HPC/l_mklb_p_2018.3.011
+cd benchmarks_2018/linux/mkl/benchmarks/linpack
 ./runme_xeon64
 ```
 
-= TOP 500 =
 
-- TOP_500 [https://www.top500.org/ TOP_500 https://www.top500.org/]
+= TOP_500 =
+- TOP_500 [https://www.top500.org/ https://www.top500.org/]
 - [1-10 LIST ""https://www.top500.org/lists/2018/11/""]
 - [1-100 https://www.top500.org/list/2018/11/?page=1]
--
+```
+```
 [[images/HPC4-ENI.jpg] ""https://www.eni.com/it_IT/innovazione/piattaforme-tecnologiche/aumento-recupero-idrocarburi/hpc.page""]
 
 
@@ -123,10 +132,11 @@ cd benchmarks_11.3.3/linux/mkl/benchmarks/linpack
 
 
 = Marchetta PoliTO =
-- Useful Tools to manage / use an HPC Cluster
+
+- Useful Tools to manage / use a HPC Cluster
   - Ansible
   - GIT
-  - Docker, Singularity
+  - Docker, Singularity, Podman
   - Nagios, Ganglia, Zabbix
   - Job Scheduler (Slurm,PBS,Grid Engine)
 
@@ -135,35 +145,38 @@ cd benchmarks_11.3.3/linux/mkl/benchmarks/linpack
 
 - Application Code (rewritten from Serial to Parallel)
 - Libraries for IPC
-- Lib to use GPU: CUDA, OpenCL
+- Libraries to use GPU: CUDA, OpenCL
 - IDE
 - GUI to High Level Tools (Jupyter Notebook)
+
 
 = IPC - Inter Process Communication =
 
 - shared files / memory + semaphores
 - [pipes (named, unnamed) https://opensource.com/article/19/4/interprocess-communication-linux-channels]
-- message queues                unidirectional
-- sockets (memory, network )    bi-directional
+- message queues (unidirectional)
+- sockets (memory, network)    (bi-directional)
 - signals
 - [RPC https://en.wikipedia.org/wiki/Remote_procedure_call]
-  - ONC/RPC, XML-RPC -> SOAP, CORBA, JSON-RPC, gRPC, ...
+  - ONC/RPC, XML-RPC -> SOAP, CORBA, JSON-RPC, gRPC
 
 
 = Approaches to message passing =
 
 : [PVM https://en.wikipedia.org/wiki/Parallel_Virtual_Machine]
-    Parallel Virtual Machine
+    **Parallel Virtual Machine** is a software tool for parallel networking of computers. It is designed to allow a network of heterogeneous Unix and/or Windows machines to be used as a single distributed parallel processor.
+    PVM was a step towards modern trends in distributed processing and grid computing but has, since the mid-1990s, largely been supplanted by the much more successful MPI standard
 
 : [MPI MPITURL]
-    Message Passing Interface
+    **Message Passing Interface** is a standardized and portable message-passing standard
+    - Implementations
+      - MPICH
+      - MVAPICH
+      - OpenMPI
+      - Commercial : Intel, HP, Microsoft
 
-= MPI =
-
-- OpenMP (threads)
-- OpenMPI
-- IntelMPI
-- PlatformMPI
+= HPC Single Node =
+    | HPC Single Node
 
 
 = Compile and Run - Hello World =
@@ -174,22 +187,24 @@ int main ( int argc, char *argv[] );
 
   return 0;
 }
-```
 
+```
 - mpicc -o hello hello.c
-- mpirun --use-hwthread-cpus -np 4 hello
+- mpirun hello
+- mpirun --use-hwthread-cpus hello
 - mpirun --use-hwthread-cpus -np 4 -tag-output hello
-- mpirun --use-hwthread-cpus -np 4 -report-bindings hello
-- mpirun --use-hwthread-cpus -np 4 --bind-to hwthread -report-bindings hello
+- mpirun --use-hwthread-cpus -np 4 --bind-to hwthread -report-bindings -tag-output hello
+
 
 = Compile and Run - hello_mpi =
 
-- [hello_mpi.c file://hello_mpi.c] (see on Editor)
+- [hello_mpi.c file://hello_mpi.c] (//see on Editor//)
 
 - mpicc -o hello_mpi hello_mpi.c
-- mpirun --use-hwthread-cpus  -np 4 -report-bindings hello_mpi
-- mpirun --use-hwthread-cpus --bind-to hwthread -np 4 hello_mpi
+- mpirun hello_mpi
+- mpirun --use-hwthread-cpus  -np 4 hello_mpi
 - mpirun --use-hwthread-cpus --bind-to hwthread -np 4 -report-bindings hello_mpi
+
 
 = Output of hello_mpi =
 ```
@@ -213,24 +228,34 @@ HELLO_MPI - Master process:
 ```
 
 = Compile and Run - ring =
+- [ring_c.c ring_c.c] (//see on Editor//)
+
 - mpicc -o ring_c ring_c.c
 - mpirun --use-hwthread-cpus --bind-to hwthread -np 4 -report-bindings ring_c
 
 = Compile and Run - Search Serial =
-- gcc -Ofast -o search_serial_mklb_p_2018.3.011l search_serial.c
+- [search_serial.c search_serial.c] (//see on Editor//)
+- gcc -Ofast -o search_serial search_serial.c
 - ./search_serial
 -
 - Elapsed CPU time is 23.3898
 
 = Compile and Run - Search MPI =
+- [search_mpi.c search_mpi.c] (//see on Editor//)
 - mpicc -Ofast -o search_mpi search_mpi.c
+- (//use nmon to see CPU load//)
 - mpirun --bind-to hwthread -np 3 search_mpi
+-
+- Elapsed wallclock time is 7 / 15.3633
 
-- Elapsed wallclock time is 12.3633
 
-- use nmon to see CPU load
+= HPC - MultiNode =
 
-= HPC HOWTO =
+    | HPC Multinode
+    [images/PI-Cluster.jpg]
+
+
+= HPC Build Your Own =
 - http://www.admin-magazine.com/HPC/Articles/Building-an-HPC-Cluster
 - http://hpc.fs.uni-lj.si/sites/default/files/HPC_for_dummies.pdf
 - https://openhpc.community/downloads/
@@ -242,47 +267,50 @@ HELLO_MPI - Master process:
 
 = Pelican HPC =
 
-https://www.pelicanhpc.org/index.html
+    | [PelicanHPC https://www.pelicanhpc.org/index.html]
+    | https://www.pelicanhpc.org/index.html
+    [images/PelicanHPC.png]
 
 
-= PelicanHPC over Virtualbox =
+= PelicanHPC over VM =
 
-First Steps ...
-sudo mkdir /cdrom
-sudo mount -oro /dev/sr1 /cdrom
-sudo /cdrom/VBoxLinuxAdditions.run
-
-sudo ln -sf /home/etc/apt/sources.list /etc/apt/sources.list
-sudo apt update
-sudo apt install libatlas3-base
-sudo apt install gpm
-
-cd hpl-2.0
-sh SetupForPelican
-cd bin/Pelican HPC
-orterun --hostfile /home/usr/tmp/bhosts -np 4 xhpl
+- cd hpl-2.0
+- sh SetupForPelican
+- cd bin/Pelican
+- mpirun --hostfile /home/user/tmp/bhosts -np 2 xhpl
+- mpirun --hostfile /home/user/tmp/bhosts -np 4 xhpl
 
 
-= PelicanHPC over KVM =
+= MPI on multiple Nodes =
+
+- mpicc -o hello hello.c
+  - mpirun hello
+- mpicc -o hello_mpi hello_mpi.c
+  - mpirun hello_mpi
+- mpicc -o ring_c ring_c.c
+  - mpirun --hostfile /home/user/tmp/bhosts -np 4 ring_c
+- gcc -Ofast -o search_serial search_serial.c
+  - ./search_serial
+- mpicc -Ofast -o search_mpi search_mpi.c
+  - (//use nmon to see CPU load//)
+  - mpirun -hostfile /home/user/tmp/bhosts -np 3 search_mpi
 
 
 = URLS =
 
-- [HPC@Polito http://hpc.polito.it/]
+- ""HPC @ Polito"" [http://hpc.polito.it/ http://hpc.polito.it/]
 -
 - https://openhpc.community
-https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
 
-= JupyterLab
-
-
-Tensorflow
-docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/tensorflow-notebook start.sh jupyter lab
-
-DataScience
-docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/datascience-notebook start.sh jupyter lab
+= JupyterLab =
+- https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
 
 
+: Tensorflow
+    docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/tensorflow-notebook start.sh jupyter lab
+
+: DataScience
+    docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/datascience-notebook start.sh jupyter lab
 
 
 = Questions =
@@ -292,16 +320,22 @@ docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Po
 
 = Sponsor =
 
-- DoIT [http://www.doit-systems.it http://www.doit-systems.it/]
+- DoIT - [http://www.doit-systems.it http://www.doit-systems.it/]
 - [DoIT - Work With US ""http://www.doit-systems.it/EN_lavoraconnoi.html""]
 
   [images/DoIT.png]
 
+- Alberto 'JCN-9000' Varesio
+- Alberto.Varesio@doit-systems.it
+- Alberto.Varesio@gmail.com
+-
+- Slides on GIT: [https://github.com/JCN-9000/Polito-HPC https://github.com/JCN-9000/Polito-HPC]
+
 ========================================================================
 
-= Extra Slides =
+= Presentation Tools used  =
 
-== Commands & Aliases ==
+== TXT2TAGS(git) + LaTEX Beamer ==
 ```
 alias S='/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
 pandoc -s -t beamer -V theme:Copenhagen -V colortheme:wolverine -f t2t -o Slides.tex Slides.txt2t
@@ -309,7 +343,9 @@ sed -i "/^ *:$/d" Slides.tex
 sed -i "/^ *-$/d" Slides.tex
 pdflatex Slides.tex > Slides.plog
 rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}'
-
+```
+== Impressive ==
+```
 alias I='impressive --noquit -f -d 1:30:00 -M -g 1280x1024 \
  --page-progress --time-display --tracking \
  Slides.pdf'
@@ -317,33 +353,6 @@ alias I='impressive --noquit -f -d 1:30:00 -M -g 1280x1024 \
 
 ========================================================================
 
-= Presentation Tools =
-
-== TXT2TAGS + LaTEX Beamer ==
-```
-/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
-pandoc -s -t beamer -f t2t -o Slides.tex Slides.txt2t
-sed -i '/^ *:$/d' Slides.tex
-sed -i '/^ *-$/d' Slides.tex
-pdflatex Slides.tex > Slides.plog
-rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}
-bl-file-manager Slides.pdf
-```
-
-== TXT2TAGS + LaTEX Beamer (alternative method) ==
-```
-/home/avaresio/GIT/txt2tags/txt2tags -vv \
--C /home/avaresio/GIT/txt2tags/templates/beamer.conf.t2t \
--T /home/avaresio/GIT/txt2tags/templates/beamer.tex \
--t tex Slides.t2t
-```
-
-== Presentation Tool ==
-```
-impressive -f -d 1:30:00 -M -g 1024x768 \
- --page-progress --time-display --tracking \
- Slides.pdf
-```
 
 = Skip =
 
@@ -352,29 +361,21 @@ impressive -f -d 1:30:00 -M -g 1024x768 \
 - Q commands
 - Queuing system
 
-== TXT2TAGS - ASCII Art Presentation ==
-```
-/home/avaresio/GIT/txt2tags/txt2tags -t aapp --slides Slides.t2t
-enscript -l -r -p file.ps Slides.aapp
-ps2pdf file.ps Slides.pdf
-```
+- GitPitch
 
-= Skip =
+= PelicanHPC over KVM =
 
---map-by hwthread
---rank-by hwthread
---bind-to hwthread
---use-hwthread-cpus
+= PelicanHPC over Virtualbox =
 
-mpirun --map-by node    : balanced - rrobin
-mpirun -nolocal
+% First Steps ...
+% sudo mkdir /cdrom
+% sudo mount -oro /dev/sr1 /cdrom
+% sudo /cdrom/VBoxLinuxAdditions.run
 
-mpirun --use-hwthread-cpus --bind-to hwthread -np 1 search_mpi
-  Elapsed wallclock time is 59.731
-mpirun --use-hwthread-cpus --bind-to hwthread -np 2 search_mpi
-  Elapsed wallclock time is 44.0702
-mpirun --use-hwthread-cpus --bind-to hwthread -np 3 search_mpi
-  Elapsed wallclock time is 31.4417
+% sudo ln -sf /home/etc/apt/sources.list /etc/apt/sources.list
+- sudo apt update
+- sudo apt install libatlas3-base
+- sudo apt install gpm
 
 
 % vim: tw=55
