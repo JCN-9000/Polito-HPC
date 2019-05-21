@@ -1,6 +1,6 @@
 HPC
 JCN-9000
-%%date(%Y-%m-%d)
+%%date(%Y-%m-%d) - CC BY-NC-SA
 %!target: art
 %!options(art): --toc --slides --width 80 --height 25
 %!target: aat
@@ -25,15 +25,11 @@ JCN-9000
 %!preproc:  MPIURL https://en.wikipedia.org/wiki/Message_passing_in_computer_clusters
 %!preproc:  MPITURL https://tinyurl.com/6mfo5pf
 
-
 = HPC =
 
 - High Performance Computer : Supercomputer
 - High Performance Computing : Parallel
-
-- [BOINC https://boinc.berkeley.edu/] is a platform for high-throughput computing
-    """Seti@Home""", """Folding@Home""", ( [List of distributed computing projects ""https://en.wikipedia.org/wiki/List_of_distributed_computing_projects""] )
-
+- High Throughput Computing : BOINC (distributed computing)
 
 = Definition =
 
@@ -62,6 +58,7 @@ JCN-9000
 
 = FLOPS =
 
+- https://it.wikipedia.org/wiki/FLOPS
 - FLOPS Unit https://en.wikipedia.org/wiki/Unit_prefix
 
 | | | **Metric prefixes in everyday use** | |
@@ -69,9 +66,9 @@ JCN-9000
 | yotta | Y | 1000000000000000000000000 | 10E24 |
 | zetta | Z | 1000000000000000000000 | 10E21 |
 | exa   | E | 1000000000000000000 | 10E18 |
-| peta  | P | 1000000000000000 | 10E15 |
+| peta  | P | 1000000000000000 (Summit 143) | 10E15 |
 | tera  | T | 1000000000000 | 10E12 |
-| giga  | G | 1000000000 (PC) | 10E9 |
+| giga  | G | 1000000000 (PC 60) | 10E9 |
 | mega  | M | 1000000 | 10E6 |
 | kilo  | k | 1000 | 10E3 |
 | hecto | h | 100 | 10E2 |
@@ -82,18 +79,14 @@ JCN-9000
 = Local FLOPS using HPL/Linpak =
 - [Rate Your PC http://hpl-calculator.sourceforge.net/]
 == Netlib Linpak ==
-- HPL from Netlib
-- http://www.netlib.org/benchmark/hpl/
-- [Build HPL.dat https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/]
++ Get HPL from Netlib [http://www.netlib.org/benchmark/hpl/ http://www.netlib.org/benchmark/hpl/]
++ Build HPL.dat [https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/ https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/]
 ```
 cd ~/GIT/Polito-HPC/hpl-2.3/testing
 mpirun -np 2 ./xhpl
 ```
 == Intel Linpak ==
-+ Download Intel Linpak [(link) https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
-+ Extract
-+ cd .../linux/mkl/benchmarks/linpack
-+ ./runme_xeon64
++ Download/Extract Intel Linpak [(link) https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
 ```
 cd ~/GIT/Polito-HPC/l_mklb_p_2018.3.011
 cd benchmarks_2018/linux/mkl/benchmarks/linpack
@@ -131,13 +124,20 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 - A Lot of $$$
 
 
+% = HPC  =
+% [images/hpc_system_diagram.png]
+
+= HPC =
+[images/hpc-components.jpg]
+
+
 = Marchetta PoliTO =
 
 - Useful Tools to manage / use a HPC Cluster
   - Ansible
   - GIT
   - Docker, Singularity, Podman
-  - Nagios, Ganglia, Zabbix
+  - Zabbix, Nagios, Ganglia
   - Job Scheduler (Slurm,PBS,Grid Engine)
 
 
@@ -150,14 +150,19 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 - GUI to High Level Tools (Jupyter Notebook)
 
 
+= Questions =
+
+[images/Lenna-Q1.png]
+
+
 = IPC - Inter Process Communication =
 
 - shared files / memory + semaphores
-- [pipes (named, unnamed) https://opensource.com/article/19/4/interprocess-communication-linux-channels]
+- pipes (named, unnamed) [(link) https://opensource.com/article/19/4/interprocess-communication-linux-channels]
 - message queues (unidirectional)
 - sockets (memory, network)    (bi-directional)
-- signals
-- [RPC https://en.wikipedia.org/wiki/Remote_procedure_call]
+- signals [(link) https://opensource.com/article/19/4/interprocess-communication-linux-networking]
+- RPC [(link) https://en.wikipedia.org/wiki/Remote_procedure_call]
   - ONC/RPC, XML-RPC -> SOAP, CORBA, JSON-RPC, gRPC
 
 
@@ -175,8 +180,9 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
       - OpenMPI
       - Commercial : Intel, HP, Microsoft
 
-= HPC Single Node =
-    | HPC Single Node
+
+= MPI - Single Node =
+    | MPI - Single Node
 
 
 = Compile and Run - Hello World =
@@ -189,8 +195,10 @@ int main ( int argc, char *argv[] );
 }
 
 ```
+% cd ~/GIT/Polito-HPC
+% man mpirun
 - mpicc -o hello hello.c
-- mpirun hello
+- mpirun hello [(man mpirun) ""https://linux.die.net/man/1/mpirun""]
 - mpirun --use-hwthread-cpus hello
 - mpirun --use-hwthread-cpus -np 4 -tag-output hello
 - mpirun --use-hwthread-cpus -np 4 --bind-to hwthread -report-bindings -tag-output hello
@@ -198,7 +206,7 @@ int main ( int argc, char *argv[] );
 
 = Compile and Run - hello_mpi =
 
-- [hello_mpi.c file://hello_mpi.c] (//see on Editor//)
+- [hello_mpi.c hello_mpi.c] (//see on Editor://)
 
 - mpicc -o hello_mpi hello_mpi.c
 - mpirun hello_mpi
@@ -232,6 +240,9 @@ HELLO_MPI - Master process:
 
 - mpicc -o ring_c ring_c.c
 - mpirun --use-hwthread-cpus --bind-to hwthread -np 4 -report-bindings ring_c
+% https://github.com/bwoshea/ACRES_MPI_tutorial/blob/master/mpi_examples/ring.py
+% - mpirun --use-hwthread-cpus --bind-to hwthread -np 4 ring_mpi.py
+
 
 = Compile and Run - Search Serial =
 - [search_serial.c search_serial.c] (//see on Editor//)
@@ -249,9 +260,9 @@ HELLO_MPI - Master process:
 - Elapsed wallclock time is 7 / 15.3633
 
 
-= HPC - MultiNode =
+= MPI - MultiNode =
 
-    | HPC Multinode
+    | MPI - Multinode
     [images/PI-Cluster.jpg]
 
 
@@ -262,8 +273,8 @@ HELLO_MPI - Master process:
 - https://opensource.com/article/18/1/how-build-hpc-system-raspberry-pi-and-openhpc
 - http://bccd.net/
 - https://www.rocksclusters.org/
-
 - https://pelicanhpc.org/
+- AWS, Azure, GCloud, VMware, IBM, Oracle
 
 = Pelican HPC =
 
@@ -296,26 +307,43 @@ HELLO_MPI - Master process:
   - mpirun -hostfile /home/user/tmp/bhosts -np 3 search_mpi
 
 
+= Queuing System =
+- Rosetta [https://confluence.desy.de/display/IS/SLURM+Rosetta https://confluence.desy.de/display/IS/SLURM+Rosetta]
+- Job submission
+- Job deletion
+- Job status
+
+
+= Submit Job =
+```
+#!/usr/bin/env bash
+# My Job Template
+# These are Instructions for the Queuing system
+#PBS -q my_preferred_queue
+#PBS -l place=excl
+#PBS -o JobNameResult.out
+#PBS -e JobNameResult.err
+#PBS -N JobName
+#PBS -l select=3:ncpus=16:mem=50gb
+# Keep NCPU aligned with PBS Request ...
+NCPU=$(( 3 * 16 ))
+# This is the script
+echo 'Running Job: $PBS_JOBNAME $PBS_JOBID in $PBS_O_WORKDIR'
+cd $PBS_O_WORKDIR
+mpirun -np $NCPU -hostfile $PBS_NODEFILE /Path/To/MyProgram Args
+```
+
+
 = URLS =
 
 - ""HPC @ Polito"" [http://hpc.polito.it/ http://hpc.polito.it/]
 -
 - https://openhpc.community
 
-= JupyterLab =
-- https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
-
-
-: Tensorflow
-    docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/tensorflow-notebook start.sh jupyter lab
-
-: DataScience
-    docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/datascience-notebook start.sh jupyter lab
-
 
 = Questions =
 
-[images/Lenna.png]
+[images/Lenna-Q1.png]
 
 
 = Sponsor =
@@ -333,6 +361,20 @@ HELLO_MPI - Master process:
 
 ========================================================================
 
+= Bonus Slides =
+
+
+= JupyterLab =
+- https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks
+
+
+: Tensorflow
+    docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/tensorflow-notebook start.sh jupyter lab
+
+: DataScience
+    docker  run -it --rm -p 8888:8888 --mount type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work jupyter/datascience-notebook start.sh jupyter lab
+
+
 = Presentation Tools used  =
 
 == TXT2TAGS(git) + LaTEX Beamer ==
@@ -341,29 +383,22 @@ alias S='/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
 pandoc -s -t beamer -V theme:Copenhagen -V colortheme:wolverine -f t2t -o Slides.tex Slides.txt2t
 sed -i "/^ *:$/d" Slides.tex
 sed -i "/^ *-$/d" Slides.tex
+sed -i "/^ *+$/d" Slides.tex
+sed -i "/^ *- - :$/d" Slides.tex
 pdflatex Slides.tex > Slides.plog
 rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}'
 ```
 == Impressive ==
 ```
-alias I='impressive --noquit -f -d 1:30:00 -M -g 1280x1024 \
+alias I='impressive --noquit -f -d 1:30:00 -M -g 1024x768 \
  --page-progress --time-display --tracking \
- Slides.pdf'
+ -u 10 Slides.pdf &'
 ```
 
 ========================================================================
 
 
 = Skip =
-
-== Further IDEAS ==
-
-- Q commands
-- Queuing system
-
-- GitPitch
-
-= PelicanHPC over KVM =
 
 = PelicanHPC over Virtualbox =
 

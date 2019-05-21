@@ -103,7 +103,7 @@
 
 \title{HPC}
 \author{JCN-9000}
-\date{2019-05-20}
+\date{2019-05-21 - CC BY-NC-SA}
 
 \begin{document}
 \frame{\titlepage}
@@ -111,21 +111,19 @@
 \begin{frame}{HPC}
 
 \begin{itemize}
+\tightlist
 \item
   High Performance Computer : Supercomputer
 \item
   High Performance Computing : Parallel
 \item
-  \href{https://boinc.berkeley.edu/}{BOINC} is a platform for
-  high-throughput computing "Seti@Home", "Folding@Home", (
-  \href{https://en.wikipedia.org/wiki/List_of_distributed_computing_projects}{List
-  of distributed computing projects} )
+  High Throughput Computing : BOINC (distributed computing)
 \end{itemize}
-
 
 \end{frame}
 
 \begin{frame}{Definition}
+
 
 \begin{description}
 \tightlist
@@ -161,6 +159,8 @@ ricorrendo tipicamente al calcolo parallelo.
 \begin{itemize}
 \tightlist
 \item
+  \url{https://it.wikipedia.org/wiki/FLOPS}
+\item
   FLOPS Unit \url{https://en.wikipedia.org/wiki/Unit_prefix}
 \end{itemize}
 
@@ -173,9 +173,9 @@ Text & Symbol & Factor & Power\tabularnewline
 yotta & Y & 1000000000000000000000000 & 10E24\tabularnewline
 zetta & Z & 1000000000000000000000 & 10E21\tabularnewline
 exa & E & 1000000000000000000 & 10E18\tabularnewline
-peta & P & 1000000000000000 & 10E15\tabularnewline
+peta & P & 1000000000000000 (Summit 143) & 10E15\tabularnewline
 tera & T & 1000000000000 & 10E12\tabularnewline
-giga & G & 1000000000 (PC) & 10E9\tabularnewline
+giga & G & 1000000000 (PC 60) & 10E9\tabularnewline
 mega & M & 1000000 & 10E6\tabularnewline
 kilo & k & 1000 & 10E3\tabularnewline
 hecto & h & 100 & 10E2\tabularnewline
@@ -196,16 +196,15 @@ deca & da & 10 & 10E1\tabularnewline
 
 \begin{block}{Netlib Linpak}
 
-\begin{itemize}
+
+\begin{enumerate}
 \tightlist
 \item
-  HPL from Netlib
+  Get HPL from Netlib \url{http://www.netlib.org/benchmark/hpl/}
 \item
-  \url{http://www.netlib.org/benchmark/hpl/}
-\item
-  \href{https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/}{Build
-  HPL.dat}
-\end{itemize}
+  Build HPL.dat
+  \url{https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/}
+\end{enumerate}
 
 \begin{verbatim}
 cd ~/GIT/Polito-HPC/hpl-2.3/testing
@@ -216,18 +215,11 @@ mpirun -np 2 ./xhpl
 
 \begin{block}{Intel Linpak}
 
-
 \begin{enumerate}
 \tightlist
 \item
-  Download Intel Linpak
+  Download/Extract Intel Linpak
   \href{https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite}{(link)}
-\item
-  Extract
-\item
-  cd .../linux/mkl/benchmarks/linpack
-\item
-  ./runme\_xeon64
 \end{enumerate}
 
 \begin{verbatim}
@@ -236,7 +228,6 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 ./runme_xeon64
 \end{verbatim}
 
-+
 
 \end{block}
 
@@ -314,6 +305,12 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 
 \end{frame}
 
+\begin{frame}{HPC}
+
+\includegraphics{images/hpc-components.jpg}
+
+\end{frame}
+
 \begin{frame}{Marchetta PoliTO}
 
 \begin{itemize}
@@ -330,7 +327,7 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
   \item
     Docker, Singularity, Podman
   \item
-    Nagios, Ganglia, Zabbix
+    Zabbix, Nagios, Ganglia
   \item
     Job Scheduler (Slurm,PBS,Grid Engine)
   \end{itemize}
@@ -359,6 +356,12 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 
 \end{frame}
 
+\begin{frame}{Questions}
+
+\includegraphics{images/Lenna-Q1.png}
+
+\end{frame}
+
 \begin{frame}{IPC - Inter Process Communication}
 
 \begin{itemize}
@@ -366,16 +369,17 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 \item
   shared files / memory + semaphores
 \item
-  \href{https://opensource.com/article/19/4/interprocess-communication-linux-channels}{pipes
-  (named, unnamed)}
+  pipes (named, unnamed)
+  \href{https://opensource.com/article/19/4/interprocess-communication-linux-channels}{(link)}
 \item
   message queues (unidirectional)
 \item
   sockets (memory, network) (bi-directional)
 \item
   signals
+  \href{https://opensource.com/article/19/4/interprocess-communication-linux-networking}{(link)}
 \item
-  \href{https://en.wikipedia.org/wiki/Remote_procedure_call}{RPC}
+  RPC \href{https://en.wikipedia.org/wiki/Remote_procedure_call}{(link)}
 
   \begin{itemize}
   \tightlist
@@ -418,19 +422,20 @@ message-passing standard
   \item
     Commercial : Intel, HP, Microsoft
   \end{itemize}
+
 \end{itemize}
+
 \end{description}
+
 
 \end{frame}
 
-\begin{frame}{HPC Single Node}
-
-- - :
+\begin{frame}{MPI - Single Node}
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
 \endhead
-HPC Single Node\tabularnewline
+MPI - Single Node\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -453,7 +458,7 @@ int main ( int argc, char *argv[] );
 \item
   mpicc -o hello hello.c
 \item
-  mpirun hello
+  mpirun hello \href{https://linux.die.net/man/1/mpirun}{(man mpirun)}
 \item
   mpirun -\/-use-hwthread-cpus hello
 \item
@@ -470,7 +475,7 @@ int main ( int argc, char *argv[] );
 
 \begin{itemize}
 \item
-  \href{file://hello_mpi.c}{hello\_mpi.c} (\emph{see on Editor})
+  \url{hello_mpi.c} (\emph{see on Editor:})
 \item
   mpicc -o hello\_mpi hello\_mpi.c
 \item
@@ -521,6 +526,7 @@ HELLO_MPI - Master process:
   -report-bindings ring\_c
 \end{itemize}
 
+
 \end{frame}
 
 \begin{frame}{Compile and Run - Search Serial}
@@ -568,12 +574,12 @@ HELLO_MPI - Master process:
 
 \end{frame}
 
-\begin{frame}{HPC - MultiNode}
+\begin{frame}{MPI - MultiNode}
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
 \endhead
-HPC Multinode\tabularnewline
+MPI - Multinode\tabularnewline
 \bottomrule
 \end{longtable}
 
@@ -584,6 +590,7 @@ HPC Multinode\tabularnewline
 \begin{frame}{HPC Build Your Own}
 
 \begin{itemize}
+\tightlist
 \item
   \url{http://www.admin-magazine.com/HPC/Articles/Building-an-HPC-Cluster}
 \item
@@ -598,6 +605,8 @@ HPC Multinode\tabularnewline
   \url{https://www.rocksclusters.org/}
 \item
   \url{https://pelicanhpc.org/}
+\item
+  AWS, Azure, GCloud, VMware, IBM, Oracle
 \end{itemize}
 
 \end{frame}
@@ -692,6 +701,45 @@ HPC Multinode\tabularnewline
 
 \end{frame}
 
+\begin{frame}{Queuing System}
+
+\begin{itemize}
+\tightlist
+\item
+  Rosetta \url{https://confluence.desy.de/display/IS/SLURM+Rosetta}
+\item
+  Job submission
+\item
+  Job deletion
+\item
+  Job status
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Submit Job}
+
+\begin{verbatim}
+#!/usr/bin/env bash
+# My Job Template
+# These are Instructions for the Queuing system
+#PBS -q my_preferred_queue
+#PBS -l place=excl
+#PBS -o JobNameResult.out
+#PBS -e JobNameResult.err
+#PBS -N JobName
+#PBS -l select=3:ncpus=16:mem=50gb
+# Keep NCPU aligned with PBS Request ...
+NCPU=$(( 3 * 16 ))
+# This is the script
+echo 'Running Job: $PBS_JOBNAME $PBS_JOBID in $PBS_O_WORKDIR'
+cd $PBS_O_WORKDIR
+mpirun -np $NCPU -hostfile $PBS_NODEFILE /Path/To/MyProgram Args
+\end{verbatim}
+
+\end{frame}
+
 \begin{frame}{URLS}
 
 \begin{itemize}
@@ -707,34 +755,12 @@ HPC Multinode\tabularnewline
   \url{https://openhpc.community}
 \end{itemize}
 
-\end{frame}
-
-\begin{frame}{JupyterLab}
-
-\begin{itemize}
-\tightlist
-\item
-  \url{https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks}
-\end{itemize}
-
-
-\begin{description}
-\item[Tensorflow]
-docker run -it -\/-rm -p 8888:8888 -\/-mount
-type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work
-jupyter/tensorflow-notebook start.sh jupyter lab
-\item[DataScience]
-docker run -it -\/-rm -p 8888:8888 -\/-mount
-type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work
-jupyter/datascience-notebook start.sh jupyter lab
-\end{description}
-
 
 \end{frame}
 
 \begin{frame}{Questions}
 
-\includegraphics{images/Lenna.png}
+\includegraphics{images/Lenna-Q1.png}
 
 \end{frame}
 
@@ -766,6 +792,33 @@ jupyter/datascience-notebook start.sh jupyter lab
 
 \end{frame}
 
+\begin{frame}{Bonus Slides}
+
+\end{frame}
+
+\begin{frame}{JupyterLab}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks}
+\end{itemize}
+
+
+\begin{description}
+\item[Tensorflow]
+docker run -it -\/-rm -p 8888:8888 -\/-mount
+type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work
+jupyter/tensorflow-notebook start.sh jupyter lab
+\item[DataScience]
+docker run -it -\/-rm -p 8888:8888 -\/-mount
+type=bind,source=/home/avaresio/GIT/Polito-HPC/Jupyter,destination=/home/jovyan/work
+jupyter/datascience-notebook start.sh jupyter lab
+\end{description}
+
+
+\end{frame}
+
 \begin{frame}[fragile]{Presentation Tools used}
 
 \begin{block}{TXT2TAGS(git) + LaTEX Beamer}
@@ -775,6 +828,8 @@ alias S='/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
 pandoc -s -t beamer -V theme:Copenhagen -V colortheme:wolverine -f t2t -o Slides.tex Slides.txt2t
 sed -i "/^ *:$/d" Slides.tex
 sed -i "/^ *-$/d" Slides.tex
+sed -i "/^ *+$/d" Slides.tex
+sed -i "/^ *- - :$/d" Slides.tex
 pdflatex Slides.tex > Slides.plog
 rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}'
 \end{verbatim}
@@ -784,9 +839,9 @@ rm Slides{.out,.vrb,.toc,.snm,.nav,.aux,.log,.plog}'
 \begin{block}{Impressive}
 
 \begin{verbatim}
-alias I='impressive --noquit -f -d 1:30:00 -M -g 1280x1024 \
+alias I='impressive --noquit -f -d 1:30:00 -M -g 1024x768 \
  --page-progress --time-display --tracking \
- Slides.pdf'
+ -u 10 Slides.pdf &'
 \end{verbatim}
 
 \end{block}
@@ -795,27 +850,9 @@ alias I='impressive --noquit -f -d 1:30:00 -M -g 1280x1024 \
 
 \begin{frame}{Skip}
 
-\begin{block}{Further IDEAS}
-
-\begin{itemize}
-\item
-  Q commands
-\item
-  Queuing system
-\item
-  GitPitch
-\end{itemize}
-
-\end{block}
-
-\end{frame}
-
-\begin{frame}{PelicanHPC over KVM}
-
 \end{frame}
 
 \begin{frame}{PelicanHPC over Virtualbox}
-
 
 \begin{itemize}
 \tightlist
