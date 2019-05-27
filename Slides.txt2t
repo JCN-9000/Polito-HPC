@@ -1,19 +1,25 @@
 HPC
 JCN-9000
-2019-05-21 - CC BY-NC-SA
+2019-05-27 - CC BY-NC-SA
 %! style    : 
 %! encoding : 
 
 
          = HPC =
 
+Supercomputer e calcolo parallelo. Come i computer simulano e risolvono
+i problemi di fluidodinamica, metereologia, prospezioni petrolifere,
+biologia, crash-test. Applichiamo gli stessi metodi per sfruttare al
+meglio i nostri computer.
+
+         = HPC =
+
 - High Performance Computer : Supercomputer
 - High Performance Computing : Parallel
 - High Throughput Computing : BOINC (distributed computing)
-
-= Definition =
-
 -
+
+         = Definition =
 
 : [HPC https://insidehpc.com/hpc-basic-training/what-is-hpc/]
 
@@ -59,10 +65,10 @@ JCN-9000
 | deca   | da   | 10   | 10E1   |
 | (none)   | (none)   | 1   | 10E0   |
 
-         = Local FLOPS using HPL/Linpak =
+         = Local FLOPS using HPL/Linpack =
 
-- [Rate Your PC http://hpl-calculator.sourceforge.net/]
-== Netlib Linpak ==
+- Rate Your PC [http://hpl-calculator.sourceforge.net/ http://hpl-calculator.sourceforge.net/]
+== Netlib Linpack ==
 -
 
 + Get HPL from Netlib [http://www.netlib.org/benchmark/hpl/ http://www.netlib.org/benchmark/hpl/]
@@ -71,8 +77,8 @@ JCN-9000
 cd ~/GIT/Polito-HPC/hpl-2.3/testing
 mpirun -np 2 ./xhpl
 ```
-== Intel Linpak ==
-+ Download/Extract Intel Linpak [(link) https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
+== Intel Linpack ==
++ Download/Extract Intel Linpack [https://tinyurl.com/hsz5btb https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite]
 ```
 cd ~/GIT/Polito-HPC/l_mklb_p_2018.3.011
 cd benchmarks_2018/linux/mkl/benchmarks/linpack
@@ -120,11 +126,11 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
          = Marchetta PoliTO =
 
 - Useful Tools to manage / use a HPC Cluster
-  - Ansible
-  - GIT
-  - Docker, Singularity, Podman
-  - Zabbix, Nagios, Ganglia
-  - Job Scheduler (Slurm,PBS,Grid Engine)
+  - Manage : Ansible
+  - Archive : GIT
+  - Container: Docker, Singularity, Podman
+  - Monitor : Zabbix, Nagios, Ganglia
+  - Job Scheduler : Slurm,PBS/Torque,Grid Engine)
   -
 -
 
@@ -195,7 +201,7 @@ int main ( int argc, char *argv[] );
 
          = Compile and Run - hello_mpi =
 
-- [hello_mpi.c hello_mpi.c] (//see on Editor://)
+- [hello_mpi.c hello_mpi.c] (//see on Editor//)
 
 - mpicc -o hello_mpi hello_mpi.c
 - mpirun hello_mpi
@@ -241,8 +247,10 @@ HELLO_MPI - Master process:
 -
 
 - Elapsed CPU time is 23.3898
+-
 
-= Compile and Run - Search MPI =
+         = Compile and Run - Search MPI =
+
 - [search_mpi.c search_mpi.c] (//see on Editor//)
 - mpicc -Ofast -o search_mpi search_mpi.c
 - (//use nmon to see CPU load//)
@@ -268,10 +276,9 @@ HELLO_MPI - Master process:
 - https://www.rocksclusters.org/
 - https://pelicanhpc.org/
 - AWS, Azure, GCloud, VMware, IBM, Oracle
-
-= Pelican HPC =
-
 -
+
+         = Pelican HPC =
 
    | [PelicanHPC https://www.pelicanhpc.org/index.html]   
    | https://www.pelicanhpc.org/index.html   
@@ -341,6 +348,7 @@ mpirun -np $NCPU -hostfile $PBS_NODEFILE /Path/To/MyProgram Args
 -
 
 - https://openhpc.community
+- https://upload.wikimedia.org/wikibooks/it/8/83/Supercomputer.pdf
 -
 
          = Questions =

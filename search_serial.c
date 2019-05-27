@@ -41,7 +41,7 @@ int main ( )
 
   a = 1;
   b = i4_huge;
-  c = 45;
+  c = 42;
 
   timestamp ( );
   printf ( "\n" );
@@ -201,7 +201,7 @@ void timestamp ( void )
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -246,11 +246,11 @@ double cpu_time ( void )
 
     The CPU time measurements available through this routine are often
     not very accurate.  In some cases, the accuracy is no better than
-    a hundredth of a second.  
+    a hundredth of a second.
 
   Licensing:
 
-    This code is distributed under the GNU LGPL license. 
+    This code is distributed under the GNU LGPL license.
 
   Modified:
 
@@ -267,7 +267,7 @@ double cpu_time ( void )
 {
   double value;
 
-  value = ( double ) clock ( ) 
+  value = ( double ) clock ( )
         / ( double ) CLOCKS_PER_SEC;
 
   return value;

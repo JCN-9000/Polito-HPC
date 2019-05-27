@@ -103,10 +103,19 @@
 
 \title{HPC}
 \author{JCN-9000}
-\date{2019-05-21 - CC BY-NC-SA}
+\date{2019-05-27 - CC BY-NC-SA}
 
 \begin{document}
 \frame{\titlepage}
+
+\begin{frame}{HPC}
+
+Supercomputer e calcolo parallelo. Come i computer simulano e risolvono
+i problemi di fluidodinamica, metereologia, prospezioni petrolifere,
+biologia, crash-test. Applichiamo gli stessi metodi per sfruttare al
+meglio i nostri computer.
+
+\end{frame}
 
 \begin{frame}{HPC}
 
@@ -120,10 +129,10 @@
   High Throughput Computing : BOINC (distributed computing)
 \end{itemize}
 
+
 \end{frame}
 
 \begin{frame}{Definition}
-
 
 \begin{description}
 \tightlist
@@ -186,15 +195,15 @@ deca & da & 10 & 10E1\tabularnewline
 
 \end{frame}
 
-\begin{frame}[fragile]{Local FLOPS using HPL/Linpak}
+\begin{frame}[fragile]{Local FLOPS using HPL/Linpack}
 
 \begin{itemize}
 \tightlist
 \item
-  \href{http://hpl-calculator.sourceforge.net/}{Rate Your PC}
+  Rate Your PC \url{http://hpl-calculator.sourceforge.net/}
 \end{itemize}
 
-\begin{block}{Netlib Linpak}
+\begin{block}{Netlib Linpack}
 
 
 \begin{enumerate}
@@ -213,13 +222,13 @@ mpirun -np 2 ./xhpl
 
 \end{block}
 
-\begin{block}{Intel Linpak}
+\begin{block}{Intel Linpack}
 
 \begin{enumerate}
 \tightlist
 \item
-  Download/Extract Intel Linpak
-  \href{https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite}{(link)}
+  Download/Extract Intel Linpack
+  \href{https://software.intel.com/en-us/articles/intel-mkl-benchmarks-suite}{https://tinyurl.com/hsz5btb}
 \end{enumerate}
 
 \begin{verbatim}
@@ -321,15 +330,15 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
   \begin{itemize}
   \tightlist
   \item
-    Ansible
+    Manage : Ansible
   \item
-    GIT
+    Archive : GIT
   \item
-    Docker, Singularity, Podman
+    Container: Docker, Singularity, Podman
   \item
-    Zabbix, Nagios, Ganglia
+    Monitor : Zabbix, Nagios, Ganglia
   \item
-    Job Scheduler (Slurm,PBS,Grid Engine)
+    Job Scheduler : Slurm,PBS/Torque,Grid Engine)
   \end{itemize}
 
 \end{itemize}
@@ -475,7 +484,7 @@ int main ( int argc, char *argv[] );
 
 \begin{itemize}
 \item
-  \url{hello_mpi.c} (\emph{see on Editor:})
+  \url{hello_mpi.c} (\emph{see on Editor})
 \item
   mpicc -o hello\_mpi hello\_mpi.c
 \item
@@ -548,6 +557,7 @@ HELLO_MPI - Master process:
   Elapsed CPU time is 23.3898
 \end{itemize}
 
+
 \end{frame}
 
 \begin{frame}{Compile and Run - Search MPI}
@@ -609,10 +619,10 @@ MPI - Multinode\tabularnewline
   AWS, Azure, GCloud, VMware, IBM, Oracle
 \end{itemize}
 
+
 \end{frame}
 
 \begin{frame}{Pelican HPC}
-
 
 \begin{longtable}[]{@{}l@{}}
 \toprule
@@ -753,6 +763,8 @@ mpirun -np $NCPU -hostfile $PBS_NODEFILE /Path/To/MyProgram Args
 \tightlist
 \item
   \url{https://openhpc.community}
+\item
+  \url{https://upload.wikimedia.org/wikibooks/it/8/83/Supercomputer.pdf}
 \end{itemize}
 
 
