@@ -103,10 +103,31 @@
 
 \title{HPC}
 \author{JCN-9000}
-\date{2019-05-27 - CC BY-NC-SA}
+\date{2019-05-28 - CC BY-NC-SA}
 
 \begin{document}
 \frame{\titlepage}
+
+\begin{frame}{Relatore}
+
+\begin{description}
+\item[Name]
+Alberto varesio
+\item[Experience]
+\url{https://www.linkedin.com/in/albertovaresio/}
+
+System Administrator UN*X Systems - HPC - PLM Services - CAD/CAM/CAE -
+Analysis, Consulting and Software Development
+\item[Contacts]
+Alberto 'JCN-9000' Varesio
+\href{Alberto.Varesio@doit-systems.it}{mailto:Alberto.Varesio@doit-systems.it}
+\href{Alberto.Varesio@gmail.com}{mailto:Alberto.Varesio@gmail.com}
+\item[Slides on GIT]
+\url{https://github.com/JCN-9000/Polito-HPC}
+\end{description}
+
+
+\end{frame}
 
 \begin{frame}{HPC}
 
@@ -212,7 +233,8 @@ deca & da & 10 & 10E1\tabularnewline
   Get HPL from Netlib \url{http://www.netlib.org/benchmark/hpl/}
 \item
   Build HPL.dat
-  \url{https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/}
+  \href{https://www.advancedclustering.com/act_kb/tune-hpl-dat-file}{https://www.advancedclustering.com/act\_kb/tune-hpl-dat-file
+  https://www.advancedclustering.com/act\_kb/tune-hpl-dat-file/}
 \end{enumerate}
 
 \begin{verbatim}
@@ -334,7 +356,7 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
   \item
     Archive : GIT
   \item
-    Container: Docker, Singularity, Podman
+    Container: Docker, Singularity, Podman, HPCCM
   \item
     Monitor : Zabbix, Nagios, Ganglia
   \item
@@ -657,17 +679,16 @@ MPI - Multinode\tabularnewline
 
 \begin{frame}{MPI on multiple Nodes}
 
+
 \begin{itemize}
 \tightlist
 \item
-  mpicc -o hello hello.c
+  mpirun hello
+\end{itemize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    mpirun hello
-  \end{itemize}
 
+\begin{itemize}
+\tightlist
 \item
   mpicc -o hello\_mpi hello\_mpi.c
 
@@ -772,35 +793,35 @@ mpirun -np $NCPU -hostfile $PBS_NODEFILE /Path/To/MyProgram Args
 
 \begin{frame}{Questions}
 
-\includegraphics{images/Lenna-Q1.png}
+\begin{description}
+\tightlist
+\item[Slides on GIT]
+\url{https://github.com/JCN-9000/Polito-HPC}
+\end{description}
+
+\includegraphics{images/Lenna-Q1.png} :
 
 \end{frame}
 
-\begin{frame}{Sponsor}
+\begin{frame}{Sponsor - DO IT Systems s.r.l}
 
-\begin{itemize}
-\item
-  DoIT - \href{http://www.doit-systems.it/}{http://www.doit-systems.it}
-\item
-  \href{http://www.doit-systems.it/EN_lavoraconnoi.html}{DoIT - Work
-  With US}
+\href{http://www.doit-systems.it}{\includegraphics{images/DoIT.png}} è
+il System Integrator italiano leader nel settore HPC e da oltre 20 anni
+supporta società di ogni dimensione in tutte le fasi implementative di
+un progetto HPC.
 
-  \includegraphics{images/DoIT.png}
-\item
-  Alberto 'JCN-9000' Varesio
-\item
-  \href{Alberto.Varesio@doit-systems.it}{mailto:Alberto.Varesio@doit-systems.it}
-\item
-  \href{Alberto.Varesio@gmail.com}{mailto:Alberto.Varesio@gmail.com}
-\end{itemize}
+Abbiamo sviluppato le necessarie competenze e professionalità con
+esperti che seguono il cliente applicando un approccio a 360° in modo
+tale da offrire ampia scelta di servizi: consulenza in fase progettuale,
+implementazione, supporto tecnico/scientifico post-installazione con una
+preparazione specifica sull'integrazione e ottimizzazione degli
+applicativi utilizzati dal client e sessioni di Training personalizzato.
 
+Per maggiori informazioni visitate
+\textbf{\url{http://www.doit-systems.it}}
 
-\begin{itemize}
-\tightlist
-\item
-  Slides on GIT: \url{https://github.com/JCN-9000/Polito-HPC}
-\end{itemize}
-
+E se volete lavorare con noi inviate una mail a :
+\textbf{\href{HR@doit-systems.it}{mailto:HR@doit-systems.it}}
 
 \end{frame}
 

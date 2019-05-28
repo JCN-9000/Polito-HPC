@@ -26,6 +26,27 @@ JCN-9000
 %!preproc:  MPIURL https://en.wikipedia.org/wiki/Message_passing_in_computer_clusters
 %!preproc:  MPITURL https://tinyurl.com/6mfo5pf
 
+
+= Relatore =
+
+: Name
+    Alberto varesio
+
+: Experience
+  https://www.linkedin.com/in/albertovaresio/
+
+  System Administrator UN*X Systems - HPC - PLM Services - CAD/CAM/CAE -
+  Analysis, Consulting and Software Development
+
+: Contacts
+  Alberto 'JCN-9000' Varesio
+  Alberto.Varesio@doit-systems.it
+  Alberto.Varesio@gmail.com
+
+: Slides on GIT
+  [https://github.com/JCN-9000/Polito-HPC https://github.com/JCN-9000/Polito-HPC]
+
+
 = HPC =
 
 Supercomputer e calcolo parallelo. Come i computer simulano e risolvono
@@ -87,10 +108,10 @@ meglio i nostri computer.
 
 
 = Local FLOPS using HPL/Linpack =
-- Rate Your PC [http://hpl-calculator.sourceforge.net/ ""http://hpl-calculator.sourceforge.net/""]
+- Rate Your PC [http://hpl-calculator.sourceforge.net/ http://hpl-calculator.sourceforge.net/]
 == Netlib Linpack ==
 + Get HPL from Netlib [http://www.netlib.org/benchmark/hpl/ http://www.netlib.org/benchmark/hpl/]
-+ Build HPL.dat [https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/ https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/]
++ Build HPL.dat [https://www.advancedclustering.com/act_kb/tune-hpl-dat-file https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/ https://www.advancedclustering.com/act_kb/tune-hpl-dat-file]
 ```
 cd ~/GIT/Polito-HPC/hpl-2.3/testing
 mpirun -np 2 ./xhpl
@@ -146,7 +167,7 @@ cd benchmarks_2018/linux/mkl/benchmarks/linpack
 - Useful Tools to manage / use a HPC Cluster
   - Manage : Ansible
   - Archive : GIT
-  - Container: Docker, Singularity, Podman
+  - Container: Docker, Singularity, Podman, HPCCM
   - Monitor : Zabbix, Nagios, Ganglia
   - Job Scheduler : Slurm,PBS/Torque,Grid Engine)
 
@@ -355,22 +376,29 @@ mpirun -np $NCPU -hostfile $PBS_NODEFILE /Path/To/MyProgram Args
 
 
 = Questions =
+: Slides on GIT
+  [https://github.com/JCN-9000/Polito-HPC https://github.com/JCN-9000/Polito-HPC]
 
 [images/Lenna-Q1.png]
 
 
-= Sponsor =
+= Sponsor - DO IT Systems s.r.l =
 
-- DoIT - [http://www.doit-systems.it http://www.doit-systems.it/]
-- [DoIT - Work With US ""http://www.doit-systems.it/EN_lavoraconnoi.html""]
+[[images/DoIT.png] http://www.doit-systems.it] è il System Integrator
+italiano leader nel settore HPC e da oltre 20 anni supporta società di
+ogni dimensione in tutte le fasi implementative di un progetto HPC.
 
-  [images/DoIT.png]
+Abbiamo sviluppato le necessarie competenze e professionalità con
+esperti che seguono il cliente applicando un approccio a 360° in modo
+tale da offrire ampia scelta di servizi: consulenza in fase
+progettuale, implementazione, supporto tecnico/scientifico
+post-installazione con una preparazione specifica sull’integrazione e
+ottimizzazione degli applicativi utilizzati dal client e sessioni di
+Training personalizzato.
 
-- Alberto 'JCN-9000' Varesio
-- Alberto.Varesio@doit-systems.it
-- Alberto.Varesio@gmail.com
--
-- Slides on GIT: [https://github.com/JCN-9000/Polito-HPC https://github.com/JCN-9000/Polito-HPC]
+Per maggiori informazioni visitate **[http://www.doit-systems.it http://www.doit-systems.it]**
+
+E se volete lavorare con noi inviate una mail a : **HR@doit-systems.it**
 
 ========================================================================
 
