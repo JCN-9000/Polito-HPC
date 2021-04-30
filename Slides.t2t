@@ -17,7 +17,9 @@ JCN-9000
 
 %COMMENT
 %Run Presentation
-%   mgp -t90 -g1280x1024  Slides.mgp
+% See Impressive alias on bottom slide
+% Other tool: dspdfviewer : Dual Screen PDF Viewer :
+% Slides and Notes on dual screen
 
 % https://tinyurl.com/
 % C-like Defines
@@ -307,7 +309,9 @@ HELLO_MPI - Master process:
 - https://www.rocksclusters.org/
 - https://pelicanhpc.org/
 - AWS, Azure, GCloud, VMware, IBM, Oracle
-
+- NEW: https://insidehpc.com/2020/02/introducing-hpc-with-a-raspberry-pi-cluster/
+- NEW: https://github.com/colinsauze/pi_cluster (RPi Cluster)
+- NEW: https://github.com/EPCCed/wee_archie (HPC Samples)
 
 = Pelican HPC =
 
@@ -420,8 +424,10 @@ E se volete lavorare con noi inviate una mail a : **HR@doit-systems.it**
 
 == TXT2TAGS(git) + LaTEX Beamer ==
 ```
-alias S='/home/avaresio/GIT/txt2tags/txt2tags -t txt2t Slides.t2t
-pandoc -s -t beamer -V theme:Copenhagen -V colortheme:wolverine -f t2t -o Slides.tex Slides.txt2t
+alias S='/home/avaresio/GIT/txt2tags_V2/txt2tags -t txt2t Slides.t2t
+pandoc -s -t beamer -V theme:Copenhagen 
+ -V colortheme:wolverine -V beameroption:'show notes on second screen'
+ -f t2t -o Slides.tex Slides.txt2t
 sed -i "/^ *:$/d" Slides.tex
 sed -i "/^ *-$/d" Slides.tex
 sed -i "/^ *+$/d" Slides.tex
